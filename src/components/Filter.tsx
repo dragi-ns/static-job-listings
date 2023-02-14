@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import FilterTablet from './FilterTablet';
 
 interface FilterProps {
@@ -8,9 +9,14 @@ interface FilterProps {
 
 function Filter({ onClick, children }: FilterProps) {
   return (
-    <li className="flex">
+    <motion.li
+      layout
+      animate={{ scale: 1 }}
+      initial={{ scale: 0 }}
+      exit={{ scale: 0 }}
+      className="flex">
       <FilterTablet onClick={onClick}>{children}</FilterTablet>
-    </li>
+    </motion.li>
   );
 }
 

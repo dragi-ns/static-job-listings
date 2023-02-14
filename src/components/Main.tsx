@@ -5,8 +5,8 @@ import JobItems from './JobItems';
 import Filter from './Filter';
 import Filters from './Filters';
 import processData from '../utils/processData';
-import classNames from '../utils/classNames';
 import DATA from '../assets/data.json';
+import { AnimatePresence } from 'framer-motion';
 
 function Main() {
   const jobs = useRef<JobInterface[]>(processData(DATA));
@@ -50,29 +50,38 @@ function Main() {
         return true;
       })
     );
+
+    window.scrollTo(0, 0);
   }, [jobs, filters]);
 
   return (
     <main className="flex-1 relative">
-      <div
-        className={classNames(
-          'container py-16',
-          filters.size > 0 ? 'pt-0' : 'pt-16'
-        )}>
-        {filters.size > 0 && (
-          <Filters removeFilters={removeFilters}>
-            {[...filters].map((filter, index) => (
-              <Filter key={index} onClick={() => removeFilter(filter)}>
+      <div className="container pb-16">
+        <Filters
+          {...(filters.size > 0
+            ? { className: 'visible opacity-100' }
+            : { className: 'invisible opacity-0 ' })}
+          removeFilters={removeFilters}>
+          <AnimatePresence initial={false}>
+            {[...filters].map((filter) => (
+              <Filter key={filter} onClick={() => removeFilter(filter)}>
                 {filter}
               </Filter>
             ))}
-          </Filters>
-        )}
+          </AnimatePresence>
+        </Filters>
 
         <JobItems>
-          {filteredJobs.map((job, index) => (
-            <JobItem key={index} job={job} addFilter={addFilter} />
-          ))}
+          <AnimatePresence>
+            {filteredJobs.map((job, index) => (
+              <JobItem
+                key={job.id}
+                index={index}
+                job={job}
+                addFilter={addFilter}
+              />
+            ))}
+          </AnimatePresence>
         </JobItems>
       </div>
     </main>

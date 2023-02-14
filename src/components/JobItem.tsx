@@ -1,16 +1,40 @@
+import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import JobInterface from '../interfaces/Job';
 import Pill from './Pill';
 import Tablet from './Tablet';
 import classNames from '../utils/classNames';
-import { ReactNode } from 'react';
+
 interface JobItemProps {
   job: JobInterface;
+  index?: number;
   addFilter: (filter: string) => void;
 }
 
-function JobItem({ job, addFilter }: JobItemProps) {
+function JobItem({ job, index, addFilter }: JobItemProps) {
   return (
-    <div
+    <motion.div
+      layout
+      variants={{
+        hidden: {
+          opacity: 0,
+          y: -50,
+        },
+        visible: (i) => ({
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: i * 0.05,
+          },
+        }),
+        exit: {
+          opacity: 0,
+        },
+      }}
+      custom={index}
+      animate="visible"
+      initial="hidden"
+      exit="exit"
       className={classNames(
         'flex flex-col lg:flex-row lg:items-center bg-white rounded-md px-5 lg:px-7 xl:px-10 pt-10 md:pt-12 lg:py-8 pb-6 relative shadow-xl shadow-dark-cyan/20',
         job.featured && 'border-l-4 border-l-dark-cyan'
@@ -19,13 +43,13 @@ function JobItem({ job, addFilter }: JobItemProps) {
       <JobItemInfo job={job} />
       <hr className="border-[1px] border-dark-grayish-cyan/30 my-4 lg:hidden" />
       <JobItemCategories>
-        {[...job.categories].map((category, index) => (
-          <li key={index}>
+        {[...job.categories].map((category) => (
+          <li key={category}>
             <Tablet onClick={() => addFilter(category)}>{category}</Tablet>
           </li>
         ))}
       </JobItemCategories>
-    </div>
+    </motion.div>
   );
 }
 
