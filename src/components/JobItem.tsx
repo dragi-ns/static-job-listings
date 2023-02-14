@@ -71,7 +71,7 @@ function JobItemInfo({ job }: JobItemInfoProps) {
 
       <h2 className=" font-bold sm:text-base lg:text-xl">
         <a
-          className="text-very-dark-grayish-cyan hover:text-dark-cyan"
+          className="text-very-dark-grayish-cyan hover:text-dark-cyan transition-colors"
           href="#">
           {job.position}
         </a>

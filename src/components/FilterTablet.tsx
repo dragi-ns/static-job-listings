@@ -15,7 +15,7 @@ function FilterTablet({ onClick, children }: FilterTabletProps) {
       </Tablet>
       <button
         onClick={onClick}
-        className="bg-dark-cyan hover:bg-very-dark-grayish-cyan text-white px-2 pt-[.15rem] rounded-r-md"
+        className="bg-dark-cyan hover:bg-very-dark-grayish-cyan text-white px-2 pt-[.15rem] rounded-r-md transition-colors"
         aria-label="Remove Filter">
         <img src={IconRemove} alt="" aria-hidden="true" />
       </button>

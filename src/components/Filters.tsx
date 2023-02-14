@@ -14,7 +14,7 @@ function Filters({ removeFilters, children }: FiltersProps) {
         </div>
         <button
           onClick={removeFilters}
-          className="self-center px-2 pt-1 font-bold text-base text-dark-grayish-cyan hover:text-dark-cyan hover:underline">
+          className="self-center px-2 pt-1 font-bold text-base text-dark-grayish-cyan hover:text-dark-cyan hover:underline transition-all">
           Clear
         </button>
       </div>

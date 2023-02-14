@@ -23,7 +23,7 @@ function Tablet({
       {...(onClick && { onClick })}
       className={classNames(
         'inline-block bg-light-grayish-cyan-tbls text-dark-cyan  text-sm font-bold px-3 py-1 rounded-md',
-        hoverable && 'hover:bg-dark-cyan hover:text-white',
+        hoverable && 'hover:bg-dark-cyan hover:text-white transition-colors',
         className
       )}>
       <span className="align-sub">{children}</span>

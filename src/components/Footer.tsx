@@ -4,14 +4,14 @@ function Footer() {
       <p>
         Challenge by{' '}
         <a
-          className="text-dark-cyan hover:text-very-dark-grayish-cyan"
+          className="text-dark-cyan hover:text-very-dark-grayish-cyan transition-colors"
           href="https://www.frontendmentor.io?ref=challenge"
           target="_blank">
           Frontend Mentor
         </a>
         . Coded by{' '}
         <a
-          className="text-dark-cyan hover:text-very-dark-grayish-cyan"
+          className="text-dark-cyan hover:text-very-dark-grayish-cyan transition-colors"
           href="https://github.com/dragi-ns">
           dragi-ns
         </a>
