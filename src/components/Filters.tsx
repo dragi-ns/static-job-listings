@@ -21,8 +21,8 @@ function Filters({ removeFilters, className, children }: FiltersProps) {
         </div>
         <button
           onClick={removeFilters}
-          className="self-center px-2 pt-1 font-bold text-base text-dark-grayish-cyan hover:text-dark-cyan hover:underline transition-all">
-          <span className="align-sub">Clear</span>
+          className="group self-center px-2 pt-1 font-bold text-base text-dark-grayish-cyan hover:text-dark-cyan transition-all">
+          <span className="align-sub group-hover:underline">Clear</span>
         </button>
       </div>
     </div>
