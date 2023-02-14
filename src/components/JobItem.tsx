@@ -1,21 +1,30 @@
 import JobInterface from '../interfaces/Job';
 import Pill from './Pill';
 import Tablet from './Tablet';
-
+import classNames from '../utils/classNames';
+import { ReactNode } from 'react';
 interface JobItemProps {
   job: JobInterface;
+  addFilter: (filter: string) => void;
 }
 
-function JobItem({ job }: JobItemProps) {
+function JobItem({ job, addFilter }: JobItemProps) {
   return (
     <div
-      className={`flex flex-col lg:flex-row lg:items-center bg-white rounded-md px-5 lg:px-7 xl:px-10 pt-10 md:pt-12 lg:py-8 pb-6 relative ${
+      className={classNames(
+        'flex flex-col lg:flex-row lg:items-center bg-white rounded-md px-5 lg:px-7 xl:px-10 pt-10 md:pt-12 lg:py-8 pb-6 relative shadow-xl shadow-dark-cyan/20',
         job.featured && 'border-l-4 border-l-dark-cyan'
-      } shadow-xl shadow-dark-cyan/20`}>
+      )}>
       <JobItemImage logo={job.logo} company={job.company}></JobItemImage>
       <JobItemInfo job={job} />
       <hr className="border-[1px] border-dark-grayish-cyan/30 my-4 lg:hidden" />
-      <JobItemCategories categories={job.categories} />
+      <JobItemCategories>
+        {[...job.categories].map((category, index) => (
+          <li key={index}>
+            <Tablet onClick={() => addFilter(category)}>{category}</Tablet>
+          </li>
+        ))}
+      </JobItemCategories>
     </div>
   );
 }
@@ -84,19 +93,11 @@ function JobItemInfo({ job }: JobItemInfoProps) {
 }
 
 interface JobItemCategoriesProps {
-  categories: Set<string>;
+  children: ReactNode;
 }
 
-function JobItemCategories({ categories }: JobItemCategoriesProps) {
-  return (
-    <ul className="flex flex-wrap gap-4 lg:ml-auto">
-      {[...categories].map((item, index) => (
-        <li key={index}>
-          <Tablet>{item}</Tablet>
-        </li>
-      ))}
-    </ul>
-  );
+function JobItemCategories({ children }: JobItemCategoriesProps) {
+  return <ul className="flex flex-wrap gap-4 lg:ml-auto">{children}</ul>;
 }
 
 export default JobItem;
